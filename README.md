@@ -1,8 +1,8 @@
 # GEOMAP
-Interface utilizando API do Google Maps em python, para mostrar localização dos makers e hospitais
 
-Esse projeto foi inspirado no código do grupo de trabalho. 
+Interface integrada a API do Google Maps programada em python, para vizualização da dispersão dos makers e hospitais no Estado do Rio de Janeiro. Com o propósito de calcular e otimizar rotas de coletas nas casas dos maker. 
 
+Somos um coletivo multidisciplinar que trabalha na fabricação de protetores faciais e equipamentos médicos, usando técnicas de impressão 3D e corte a laser, em prol de uma causa única: a proteção dos profissionais da área de saúde  que enfrentam a batalha contra o novo vírus Corona (COVID-19). 
 
 
 # Agradecimentos
