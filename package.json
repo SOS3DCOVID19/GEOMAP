@@ -1,0 +1,19 @@
+{
+   "name": "geomap",
+   "version": "1.0.0",
+   "description": "",
+   "main": "app.js",
+   "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "start": "node app",
+      "run": "node app"
+   },
+   "author": "author",
+   "license": "GPL-3.0",
+   "dependencies": {
+      "express": "^4.17.1",
+      "googleapis": "^39.2.0",
+      "http-server": "^0.12.1",
+      "request": "^2.88.2"
+   }
+}
