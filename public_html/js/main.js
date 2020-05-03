@@ -98,20 +98,29 @@ $(async function () {
 			var tipo = hospital[8]
 			var coordenadas = hospital[25]
 			var casos = hospital[26];
-			var qtd = parseInt(hospital[17])+parseInt(hospital[18])+parseInt(hospital[19])+parseInt(hospital[20]);
+			var demanda = parseInt(hospital[13])+parseInt(hospital[14])+parseInt(hospital[15])+parseInt(hospital[16]);
+			var entrega = parseInt(hospital[17])+parseInt(hospital[18])+parseInt(hospital[19])+parseInt(hospital[20]);
 			var [lat, lng] = coordenadas.split(',').map(parseFloat)
 			
 			var coordenadas = new google.maps.LatLng(lat,lng)
 			var coordenadas2 = new google.maps.LatLng(lat+0.001,lng+0.001)
-			
+			var performance = parseInt((entrega/demanda)*100).toString()
+			if(entrega == 0 && demanda == 0){
+				performance = 0
+			}
+			if (entrega != 0 && demanda == 0){
+				performance = 100
+			}
 			var info = '<div id="content">'+
 			'<div id="siteNotice">'+
 			'</div>'+
 			'<h1 id="firstHeading" class="firstHeading">'+nome+'</h1>'+
 			'<div id="bodyContent">'+
-			'<p><strong>Tipo de Hospital:</strong>'+tipo+'</p>'+
-			'<p><strong>Equipamentos entregues:</strong>'+qtd+'</p>'+
-			'</div>'+'</div>';
+			'<p><strong>Tipo de Hospital:</strong> '+tipo+'</p>'+
+			'<p><strong>Demanda de equipamentos:</strong> '+demanda+'</p>'+
+			'<p><strong>Entrega:</strong></p><div class = "container"><div class = "entrega html"><strong> '+entrega+'</strong></div></div>'+
+			'</div>'+'</div>'+
+			'<style> * {box-sizing:border-box} .container {width: 100%; }.entrega {text-align: right; padding-top: 10px; padding-bottom: 10px; color: ; }.html {height: 25px; width:'+performance+'%; background-color: #40E0D0;   border-radius: 10px 10px 10px 10px;} </style>';
 			
 			var info2 = '<div id="content">'+
 			'<div id="siteNotice">'+
