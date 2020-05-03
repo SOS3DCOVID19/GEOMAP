@@ -19,13 +19,15 @@ var getSheet	= require('./js/sheets').getSheet
 //Veja um exemplo de planilha em https://docs.google.com/spreadsheets/d/15q0ahJ_TaJJHidKPiLva2etYUtzgpoZNRgHIugDPIDQ/edit?usp=sharing
 const planilha_hospitais = '1FoMe6TuFrByOC5Bbvc60uyuX_4E6JYR-wYAx286jBeU' //A URL da sua planilha google deve ser inserida aqui
 const aba = 'Hospitais_BD' //Nome da página (aba) da planilha
-const intervalo = 'A2:Z' //Intervalo a ser buscado
+const intervalo = 'A2:AA' //Intervalo a ser buscado
 //-----------------------------------------------
 
 //------------------- Rotas ---------------------
 //Esta rota entregará os dados de uma planilha Google, mas pode ser substituiída por uma qualquer outra fonte de dados
 app.use('/hospitais', async (req, res) => {
-	getSheet(planilha_hospitais, aba, intervalo).then(function(hospitais){
+	var result = getSheet(planilha_hospitais, aba, 'A2:AA')
+	console.log(result)
+	result.then(function(hospitais){
 		res.send(hospitais)
 	});
 })

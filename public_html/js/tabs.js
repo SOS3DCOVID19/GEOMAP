@@ -15,9 +15,9 @@ $(function () {
 
 	var hash = window.location.hash
 	
+
 	hash =((hash=="")?"tab-mapa":hash.substring(1))
 	$('.sidebar li[data-target="'+hash+'"]')[0].click()
 
 	
-
 });

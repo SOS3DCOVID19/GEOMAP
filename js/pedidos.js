@@ -1,9 +1,9 @@
 var getSheets = require('./sheets.js').get
 
 var planilha_hospitais = '1FoMe6TuFrByOC5Bbvc60uyuX_4E6JYR-wYAx286jBeU'
-var I = 'A:AG'
+var I = 'A:AA'
 
-var planilha = "Entregas_BD"
+var planilha = "Hospitais_BD"
 
 module.exports = async (req, res)=>{
 	

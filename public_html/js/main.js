@@ -85,47 +85,73 @@ $(async function () {
 		zoom:12
 		//mapTypeId: 'satellite'
 	});
-	
 	// ------------------- Plota KML das regiões no mapa --------------------
-	var kmlPath = 'GEOMAP/public_html/kml/regioes_adm_transp.kmz' + '?ts='+(new Date().getTime())
+	var kmlPath = 'https://raw.githubusercontent.com/SOS3DCOVID19/GEOMAPv2/master/regioes_adm_transp.kmz' + '?ts='+(new Date().getTime())
 	var kmlLayer = new google.maps.KmlLayer(kmlPath, {
 		preserveViewport: true,
 		map: map
 	})
-
-
+	
 	$.get('/hospitais').then(function(hospitais){
 		hospitais.forEach(function(hospital){
 			var nome = hospital[3]
 			var tipo = hospital[8]
-			var qtd = (parseInt(hospital[17])+parseInt(hospital[18])+parseInt(hospital[19])+parseInt(hospital[20]))
 			var coordenadas = hospital[25]
+			var casos = hospital[26];
+			var qtd = parseInt(hospital[17])+parseInt(hospital[18])+parseInt(hospital[19])+parseInt(hospital[20]);
 			var [lat, lng] = coordenadas.split(',').map(parseFloat)
-
+			
 			var coordenadas = new google.maps.LatLng(lat,lng)
-
+			var coordenadas2 = new google.maps.LatLng(lat+0.001,lng+0.001)
+			
 			var info = '<div id="content">'+
 			'<div id="siteNotice">'+
 			'</div>'+
 			'<h1 id="firstHeading" class="firstHeading">'+nome+'</h1>'+
 			'<div id="bodyContent">'+
-			'<p><strong>Tipo de Hospital:</strong> '+tipo+'</p>'+
-			'<p><strong>Equipamentos entregues:</strong> '+qtd+'</p>'+
+			'<p><strong>Tipo de Hospital:</strong>'+tipo+'</p>'+
+			'<p><strong>Equipamentos entregues:</strong>'+qtd+'</p>'+
+			'</div>'+'</div>';
+			
+			var info2 = '<div id="content">'+
+			'<div id="siteNotice">'+
 			'</div>'+
-			'</div>';
-	  
+			'<h1 id="firstHeading" class="firstHeading">'+nome+'</h1>'+
+			'<div id="bodyContent">'+
+			'<p><strong>Tipo de Hospital:</strong>'+tipo+'</p>'+
+			'<p><strong>Número de casos:</strong>'+casos+'</p>'+
+			'</div>'+'</div>';
 
-			marcador(coordenadas, info, '/img/hosp-atendido.png',map)
-		})
-
+			if (tipo == "Privado"){
+				if(casos>0){
+					marcador(coordenadas2, info2, '/img/bioh-yellow.png',map)
+				}
+				
+				marcador(coordenadas,info,'/img/yellow.png',map)
+			}else{
+				if(casos>0){
+					marcador(coordenadas2, info2, '/img/bioh.png',map)
+				}
+				marcador(coordenadas,info,'/img/red.png',map)
+			}
+			/*if (qtd==0){
+				marcador(coordenadas, info, '/img/hosp-pendente.png',map2)
+			}
+			if (qtd > 0){
+				marcador(coordenadas, info, '/img/hosp-pendente.png',map2)
+			}*/
+		});
+		
 		loading(false); //remove a animação de carregamento da página
-	})
-
+	});
 	
+
+
 	//Para georreferenciar uma unidade de saúde, é possível obter as coordenadas pelo nome, utilizando a biblioteca Places
 	//Script para Georreferenciamento:
 
 	var service = new google.maps.places.PlacesService(map);
+
 	/**
 	 * Obtém as coordenadas geográficas de um local através do nome
 	 * @param {string} nome_do_lugar 

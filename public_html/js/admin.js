@@ -68,7 +68,7 @@ $(async function () {
 	});
 
 		// ------------------- Plota KML das regiões no mapa --------------------
-		var kmlPath = 'GEOMAP/public_html/kml/regioes_adm_transp.kmz' + '?ts='+(new Date().getTime())
+		var kmlPath = 'https://raw.githubusercontent.com/SOS3DCOVID19/GEOMAPv2/master/regioes_adm_transp.kmz' + '?ts='+(new Date().getTime())
 		var kmlLayer = new google.maps.KmlLayer(kmlPath, {
 		preserveViewport: true,
 		map: mapa_teste
